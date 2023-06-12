@@ -1,37 +1,31 @@
 import random
-import string
+from colorama import Fore, Style
 
-logo = """
-
+logo = f'''
+{Fore.MAGENTA}
 ███████╗██╗   ██╗███╗   ██╗███████╗ █████╗ ██╗██╗     
 ██╔════╝╚██╗ ██╔╝████╗  ██║██╔════╝██╔══██╗██║██║     
 ███████╗ ╚████╔╝ ██╔██╗ ██║█████╗  ███████║██║██║     
 ╚════██║  ╚██╔╝  ██║╚██╗██║██╔══╝  ██╔══██║██║██║     
 ███████║   ██║   ██║ ╚████║██║     ██║  ██║██║███████╗
 ╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝
-v1.02
-                                                      
-"""
+{Fore.CYAN}1.12A{Style.RESET_ALL}
+'''
 
-# Generate a random string of uppercase characters
-random_string = ''.join(random.choices(string.ascii_uppercase, k=712))
+def generate_cookie():
+    cookie_string = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_" + ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for _ in range(712))
+    return cookie_string
 
-# Warning text
-warning_text = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_"
+def main():
+    print('\033c')  # Clear console
+    print(logo)
+    num_cookies = int(input(f"{Fore.RED}How many cookies would you like to generate? {Style.RESET_ALL}"))
 
-# Combine the warning text and random string
-final_string = warning_text + random_string
+    cookies = []
+    for _ in range(num_cookies):
+        cookies.append(generate_cookie())
 
-print(logo)
+    print('\n'.join(cookies))
 
-# Ask user if they want to save the final_string to a file
-save_to_file = input("Do you want to save the generated cookie to a file? (Y/N): ")
-
-if save_to_file.upper() == "Y":
-    # Save final_string to a file
-    with open("cookie.txt", "w") as file:
-        file.write(final_string)
-    print("Cookie saved to 'cookie.txt'.")
-else:
-    print("Cookie not saved to a file.")
-print(final_string)
+if __name__ == '__main__':
+    main()
